@@ -11,7 +11,10 @@ import {
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BASE_URL = 'http://localhost:5001'; // Update if testing on a real device
+const BASE_URL = Platform.OS === 'android'
+? 'http://10.0.2.2:5001'
+: 'http://localhost:5001';
+
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');

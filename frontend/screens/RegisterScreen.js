@@ -11,7 +11,11 @@ import {
 } from 'react-native';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:5001';
+const BASE_URL = Platform.OS === 'android'
+? 'http://10.0.2.2:5001'
+: 'http://localhost:5001';
+
+
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState('');
