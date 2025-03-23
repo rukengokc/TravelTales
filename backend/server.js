@@ -5,6 +5,8 @@ const dotenv = require("dotenv");
 const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Route = require('./models/Route');
+
 
 dotenv.config();
 
@@ -62,5 +64,25 @@ app.post("/login", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
+// Save a route
+app.post('/routes', async (req, res) => {
+    const { userId, routePoints, isDraft } = req.body;
+  
+    if (!userId || !Array.isArray(routePoints)) {
+      return res.status(400).json({ message: 'Invalid route data' });
+    }
+  
+    try {
+      const newRoute = new Route({ userId, routePoints, isDraft });
+      await newRoute.save();
+      res.status(201).json({ message: 'Route saved successfully', route: newRoute });
+    } catch (error) {
+      console.error('Error saving route:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
+
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+

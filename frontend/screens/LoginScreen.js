@@ -9,11 +9,9 @@ import {
   Platform
 } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// - Android Emulator: 10.0.2.2:5001
-// - iOS Simulator: localhost:5001
-// - Real Device on same Wi-Fi: 192.168.x.x:5001
-const BASE_URL = 'http://localhost:5001';
+const BASE_URL = 'http://localhost:5001'; // Update if testing on a real device
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -22,7 +20,11 @@ export default function LoginScreen({ navigation }) {
   const handleLogin = async () => {
     try {
       const res = await axios.post(`${BASE_URL}/login`, { email, password });
-      alert(`Login successful! Welcome, ${res.data.username}`);
+      const { userId, username } = res.data;
+
+      await AsyncStorage.setItem('userId', userId);
+      alert(`Login successful! Welcome, ${username}`);
+      navigation.navigate('CreateRoute');
     } catch (err) {
       alert('Login failed!');
     }

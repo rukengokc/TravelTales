@@ -1,21 +1,33 @@
 {
   "expo": {
-    "name": "myclassicapp",
+    "name": "TravelTales",
     "slug": "myclassicapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.sezinyilmaz.traveltales",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDoASGPpGzDNBI1uGiip1JRdVvM9upw7eQ"
+      },
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.sezinyilmaz.traveltales",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDoASGPpGzDNBI1uGiip1JRdVvM9upw7eQ"
+        }
+      },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -23,6 +35,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d81f417b-2cf5-4288-aa80-58f72fd55ab9"
+      }
+    },
+    "owner": "sezinyilmaz"
   }
 }

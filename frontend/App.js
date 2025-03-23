@@ -5,22 +5,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import CreateRouteScreen from './screens/CreateRouteScreen';
+import SaveRouteScreen from './screens/SaveRouteScreen';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
-          options={{ title: 'Login' }} 
         />
         <Stack.Screen 
           name="Register" 
           component={RegisterScreen} 
-          options={{ title: 'Register' }} 
+        />
+        <Stack.Screen 
+          name="CreateRoute" 
+          component={CreateRouteScreen} 
+        />
+        <Stack.Screen 
+          name="SaveRoute" 
+          component={SaveRouteScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>
