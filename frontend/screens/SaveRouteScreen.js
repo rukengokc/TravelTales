@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Dimensions, Button, TextInput, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Button,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform
+} from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BASE_URL = 'http://localhost:5001'; 
+const BASE_URL = Platform.OS === 'android'
+  ? 'http://10.0.2.2:5001'
+  : 'http://localhost:5001';
 
-const SaveRouteScreen = ({ route }) => {
+const SaveRouteScreen = ({ route, navigation }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [userId, setUserId] = useState('');
@@ -42,6 +55,7 @@ const SaveRouteScreen = ({ route }) => {
         description,
       });
       Alert.alert(isDraft ? 'Draft saved!' : 'Route shared!');
+      navigation.navigate(isDraft ? 'MyDraftRoutes' : 'MySharedRoutes');
     } catch (err) {
       console.error('Save error:', err);
       Alert.alert('Error saving route');
