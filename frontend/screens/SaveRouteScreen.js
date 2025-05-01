@@ -7,8 +7,6 @@ import {
   Button,
   TextInput,
   Alert,
-  TouchableOpacity,
-  KeyboardAvoidingView,
   Platform
 } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
@@ -40,7 +38,7 @@ const SaveRouteScreen = ({ route, navigation }) => {
     getUserId();
   }, []);
 
-  const saveRoute = async (isDraft) => {
+  const shareRoute = async () => {
     if (!title || !description) {
       Alert.alert("Please enter both a title and description.");
       return;
@@ -50,15 +48,15 @@ const SaveRouteScreen = ({ route, navigation }) => {
       await axios.post(`${BASE_URL}/routes`, {
         userId,
         routePoints,
-        isDraft,
+        isDraft: false,
         title,
         description,
       });
-      Alert.alert(isDraft ? 'Draft saved!' : 'Route shared!');
-      navigation.navigate(isDraft ? 'MyDraftRoutes' : 'MySharedRoutes');
+      Alert.alert('Route shared!');
+      navigation.navigate('MySharedRoutes');
     } catch (err) {
-      console.error('Save error:', err);
-      Alert.alert('Error saving route');
+      console.error('Share error:', err);
+      Alert.alert('Error sharing route');
     }
   };
 
@@ -84,8 +82,7 @@ const SaveRouteScreen = ({ route, navigation }) => {
           onChangeText={setDescription}
           value={description}
         />
-        <Button title="Save as Draft" onPress={() => saveRoute(true)} />
-        <Button title="Share" onPress={() => saveRoute(false)} />
+        <Button title="Share" onPress={shareRoute} />
       </View>
     </View>
   );

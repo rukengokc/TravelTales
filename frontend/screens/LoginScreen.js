@@ -24,14 +24,19 @@ export default function LoginScreen({ navigation }) {
     try {
       const res = await axios.post(`${BASE_URL}/login`, { email, password });
       const { userId, username } = res.data;
-
+  
+      // ✅ Save both userId and username
       await AsyncStorage.setItem('userId', userId);
+      await AsyncStorage.setItem('username', username);
+  
       alert(`Login successful! Welcome, ${username}`);
-      navigation.navigate('CreateRoute');
+      navigation.navigate('Main', { screen: 'Profile' });
+  
     } catch (err) {
       alert('Login failed!');
     }
   };
+  
 
   return (
     <KeyboardAvoidingView
