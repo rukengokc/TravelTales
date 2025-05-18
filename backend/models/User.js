@@ -6,14 +6,9 @@ const UserSchema = new mongoose.Schema({
   password: String,
   dateOfBirth: Date,
   profileImage: String,
-  followers: {
-    type: Number,
-    default: 0
-  },
-  following: {
-    type: Number,
-    default: 0
-  }
+  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  role: { type: String, enum: ['user', 'admin'], default: 'user' }
 });
 
 module.exports = mongoose.model('User', UserSchema);

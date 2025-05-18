@@ -28,6 +28,7 @@ export default function LoginScreen({ navigation }) {
       // ✅ Save both userId and username
       await AsyncStorage.setItem('userId', userId);
       await AsyncStorage.setItem('username', username);
+      await AsyncStorage.setItem('role', res.data.role);
   
       alert(`Login successful! Welcome, ${username}`);
       navigation.navigate('Main', { screen: 'Profile' });
