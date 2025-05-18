@@ -18,7 +18,7 @@ const BASE_URL = Platform.OS === 'android'
   ? 'http://10.0.2.2:5001'
   : 'http://localhost:5001';
 
-const GOOGLE_MAPS_API_KEY = 'AIzaSyCJcfV07R7UMQknmmYqNctfYvAgLssam7g';
+const GOOGLE_MAPS_API_KEY = '.....';
 
 function isValidCoord(p) {
   return (

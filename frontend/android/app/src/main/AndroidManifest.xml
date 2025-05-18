@@ -28,7 +28,7 @@
     <!-- ✅ Add your API key here -->
     <meta-data
       android:name="com.google.android.geo.API_KEY"
-      android:value="AIzaSyCJcfV07R7UMQknmmYqNctfYvAgLssam7g" />
+      android:value="...." />
 
     <meta-data
       android:name="expo.modules.updates.ENABLED"
